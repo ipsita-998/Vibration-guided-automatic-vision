@@ -1,0 +1,73 @@
+// Author: Ipsita sanyal
+// Topic : vibration guided automatic vision
+// this code is only used to rotate the camera module using the vibration sensor data 
+// which inturn activates the servo motor
+#include <Servo.h>
+Servo myservo;//create servo object to control a motor
+int motionDetectedleft = 10;
+int motionDetectedright = 10;
+int sensorVal = 0;
+int pin=13;
+// servo motor connect orange to 9;red to 5V;brown to GND
+void setup() {
+   Serial.begin(115200);
+   pinMode(7,INPUT);//motionDetectedleft
+   pinMode(8,INPUT);//motionDetectedright
+   pinMode(13,OUTPUT);
+   myservo.attach(9);//attachs the servo on pin 9 to servo object 
+   //myservo.write(0);//back to 0 degrees 
+   delay(1000);//wait for a second
+}
+ 
+void loop() {
+  myservo.write(90);
+   motionDetectedleft = digitalRead(8);// read the data from the vibration sensor connected to pin 8
+   motionDetectedright=digitalRead(7);// read the data from the vibration sensor connected to pin 7
+   Serial.print(" Digital :");
+   Serial.println(motionDetectedleft);
+   if(motionDetectedleft==0) // if the sensor detects a vibration the value becomes 0 hence checking for 0 at pin 8 
+   {
+    digitalWrite(pin,HIGH);
+    delay(1000);
+   
+   for(int num=90;num>=30;num--) //you can change the angle according to the placement of the vibration sensor
+ {                                
+     myservo.write(num);//back to 'num' degrees(90 to 0)
+     delay(10);//control servo speed 
+  }
+  delay(2000);
+   for(int num=30;num<=90;num++)
+  {
+     myservo.write(num);//back to 'num' degrees(0 to 90)
+     delay(10);//control servo speed
+  }
+  
+  digitalWrite(pin,LOW);
+  delay(1000);
+  
+   }
+   else if ( motionDetectedright ==0)
+   {
+    digitalWrite(pin,HIGH);
+    delay(1000);
+      for(int num=90;num<=150;num++)
+  {
+     myservo.write(num);//back to 'num' degrees(90 to 180)
+     delay(10);//control servo speed
+  }
+  delay(2000);
+   for(int num=150;num>=90;num--)
+ {
+     myservo.write(num);//back to 'num' degrees(180 to 90)
+     delay(10);//control servo speed 
+  }
+  digitalWrite(pin,LOW);
+  delay(1000);
+   }
+   else
+   {
+    digitalWrite(pin,LOW);
+    
+   }
+   //delay(10);
+}
