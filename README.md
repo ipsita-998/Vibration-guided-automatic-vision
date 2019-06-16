@@ -53,6 +53,13 @@ raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --so
 
 http://IP address of your raspberry pi :8160 
 
+for example : http://192.168.1.19:8160 
+
+where 192.168.1.19 is the IP of the raspbery pi
+
+
+
+
 
  
  
