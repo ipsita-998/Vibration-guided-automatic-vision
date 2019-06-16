@@ -7,6 +7,7 @@ where only one camera module can cover the entire area instead of having multipl
 implemented for surveillance. 
 
 The video link of the working model of this project is as follows
+
 https://drive.google.com/file/d/1-4YlXo5mPkwj5zYY585xsM7c_UXSeJ5X/view?usp=sharing
 
 # hardware Requirements
@@ -37,14 +38,19 @@ https://drive.google.com/file/d/1-4YlXo5mPkwj5zYY585xsM7c_UXSeJ5X/view?usp=shari
 - get the IP address of the pi
    -we can get the ip address of the PI by using the "FING" app
 - WIndows users follow the link below for ssh to pi
+
  https://www.youtube.com/watch?v=uNStEDWnPxY
+ 
 - Mac users follow the link below fo ssh to pi
+
  https://www.youtube.com/watch?v=0wn44MbxtZw
 
 - After the conficuration of ssh to pi type the below command in putty (for windows) or the terminal (for mac)
+
 raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
 
 - in the  vlc app goto the "stream" option and enter the follwing url
+
 http://IP address of your raspberry pi :8160 
 
 
